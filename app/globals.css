@@ -16,12 +16,25 @@
 
 @theme inline {
 	--font-title: Phantom Sans, sans-serif;
+	--color-primary: #FFFBF1;
 	
 }
 
 
 h1, h2, h3, p, body, div {
 	@apply text-black font-title
+}
+
+
+.wordcloud {
+	@apply flex flex-col select-none
+  }
+.wordcloud svg {
+	@apply p-[1rem]
+}
+
+.wordcloud label {
+	@apply inline-flex items-center text-xs md:text-lg mr-2
 }
 
 

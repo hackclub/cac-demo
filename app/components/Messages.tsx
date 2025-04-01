@@ -6,40 +6,12 @@ import { useState } from "react";
 import { scaleLog } from "@visx/scale";
 import { Text } from "@visx/text";
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
-
-
-interface TopicItem {
-  topic: string
-}
-
-interface ExampleProps {
-  width: number;
-  height: number;
-  wordList: any;
-  showControls?: boolean;
-}
-
-export interface WordData {
-  text: string;
-  value: number;
-}
+import {ExampleProps, WordData } from "@/utils/types";
+import { countTopics } from "@/utils/sort";
 
 
 const colors = ["#005db1", "#002343", " #85B4D6", "#0c4a6e"];
 
-function countTopics(list: TopicItem[]): WordData[] {
-  const topicCount: { [key: string]: number } = {};
-
-  list.forEach(item => {
-    const topic = item.topic;
-    topicCount[topic] = (topicCount[topic] || 0) + 1;
-  });
-
-  return Object.keys(topicCount).map(topic => ({
-    text: topic,
-    value: topicCount[topic]
-  }));
-}
 
 const fixedValueGenerator = () => 0.5;
 
@@ -61,7 +33,7 @@ function Example({ width, height, wordList}: ExampleProps) {
         width={width}
         height={height}
         fontSize={fontSizeSetter}
-        font={"verdana"}
+        font={"Phantom Sans"}
         padding={20}
         spiral={"archimedean"}
         rotate={0}
@@ -74,7 +46,7 @@ function Example({ width, height, wordList}: ExampleProps) {
               fill={colors[i % colors.length]}
               textAnchor={"middle"}
               transform={`translate(${w.x}, ${w.y}) rotate(${w.rotate})`}
-              fontSize={w.size! * 2}
+              fontSize={width < 768 ? w.size! * 1.2 : w.size! * 2}
               fontFamily={w.font}
             >
               {w.text}
@@ -82,27 +54,6 @@ function Example({ width, height, wordList}: ExampleProps) {
           ))
         }
       </Wordcloud>
-      <style jsx>{`
-        .wordcloud {
-          display: flex;
-          flex-direction: column;
-          user-select: none;
-        }
-        .wordcloud svg {
-          margin: 1rem 0;
-          cursor: pointer;
-        }
-
-        .wordcloud label {
-          display: inline-flex;
-          align-items: center;
-          font-size: 14px;
-          margin-right: 8px;
-        }
-        .wordcloud textarea {
-          min-height: 100px;
-        }
-      `}</style>
     </div>
   );
 }
@@ -118,9 +69,8 @@ export default function Messages({slide}: {slide: number}){
     if (data){
       wordsList = data[0]
     }
-
     return (
-        <div className = "w-screen h-screen absolute">
+        <div className = "w-full h-full overflow-auto">
           <ParentSize>{({ width, height }) => 
             <Example width={width} height={height} wordList = {wordsList}/>
           }</ParentSize>

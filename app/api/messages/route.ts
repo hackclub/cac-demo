@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { parse } from 'querystring'; 
 import { PrismaClient } from "@prisma/client";
+import { countTopics } from "@/utils/sort";
 
 const prisma = new PrismaClient();
 
@@ -15,9 +16,25 @@ export async function POST(request: NextRequest){
         select: {
             id: true,
             prompt: true,
-            directive: true
+            directive: true,
+            wordcloud: true
         }
     }))!
+
+    let context, sortedList
+
+    if (slideDetails.wordcloud){
+        context = (await prisma.message.findMany({
+            where: {
+                slideId: slideDetails.id
+            }, 
+            select: {
+                topic: true,
+            }
+        }))
+        const sortedList = countTopics(context).slice(0,5).map((message) => message.text)
+    }
+
 
     const mainTopic = await fetch("https://ai.hackclub.com/chat/completions", { 
         method: "POST",
@@ -46,6 +63,7 @@ export async function POST(request: NextRequest){
             slideId: slideDetails.id
         }
     })
+    console.log("response received")
     return NextResponse.json(response)
 }   
 
