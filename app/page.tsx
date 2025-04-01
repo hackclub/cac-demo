@@ -47,7 +47,7 @@ export default function Home() {
             </div>
             <div className = "float-center *:self-center md:float-right flex flex-col gap-1">
               <SignIn/>
-              <h1 className = "text-3xl md:text-4xl lg:text-6xl self-center justify-self-center h-full">(855) 608-8154</h1>
+              <h1 className = "text-3xl md:text-4xl lg:text-6xl self-center justify-self-center h-full">{process.env.NEXT_PUBLIC_PHONE_NUMBER}</h1>
               <h2 className = "text-xl md:text-2xl">Text your answer!</h2>
             </div>
           </div>
