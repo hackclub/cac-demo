@@ -17,7 +17,7 @@ export default function Home() {
   
   async function getInitSlideAuthed(){
     const r = await fetch("/api/active").then(r => r.json())
-    setCurrentSlide(r)
+    setCurrentSlide(r.id)
     console.log("the active slide was", r, currentSlide)
   }
 

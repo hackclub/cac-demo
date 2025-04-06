@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 async function main(){
   const checkIfExists = await prisma.slide.findMany()
-  console.log(!checkIfExists.length)
   if (!checkIfExists.length){
     const createSlides = await prisma.slide.createMany({
       data: [
@@ -20,7 +19,7 @@ async function main(){
         },
         {
           "prompt": "What do you want to see on this website?",
-          "directive": "Generate the prompt provided as a reusable HTML component that can be directly dropped into a <div>. DO NOT RENDER any encapsulating markdown tags or any explanations. If irrelevant or inappropriate, return ''. If body text required, use Lorem Ipsum. If JavaScript used, use unique names prefixed with a ranodm number distinct to what you're generating for each variable.",
+          "directive": "Generate the prompt provided as a reusable HTML component that can be directly dropped into a <div>. DO NOT RENDER ANY ENCAPSULATING MARKDOWN TAGS OR EXPLANATIONS. If irrelevant or inappropriate, return ''. If body text required, use Lorem Ipsum.",
           "type": "ai"
         },
         {

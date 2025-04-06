@@ -20,7 +20,7 @@ function ExtremelyDangerousElement({render}: {render: string}){
 
   return (
     <>
-    <div className = "h-max" ref={elRef} dangerouslySetInnerHTML={{ __html: render}}/>
+    <div className = "" ref={elRef} dangerouslySetInnerHTML={{ __html: render}}/>
     </>
 
   )
@@ -33,7 +33,6 @@ export default function Assets({slide}: {slide: number}){
       }
     )
     const [useJavaScript, setUseJavaScript] = useState(true)
-    console.log(useJavaScript)
 
     let componentList = []
     if (data){
@@ -41,21 +40,17 @@ export default function Assets({slide}: {slide: number}){
     }
     const columns = ("columns-" + Math.ceil(componentList.length/3))
 
-    if (useJavaScript){
       return (
+        <>
+        <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-white">JavaScript enabled: {useJavaScript.toString()}</button>
           <div className = {`${columns} relative columns-4 h-[140vh] overflow-auto gap-10 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit`}>
-              <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-white">JavaScript enabled: {useJavaScript}</button>
-              { 
-                componentList.map((component: any, index: number) => 
-                <ExtremelyDangerousElement render={component.topic} key={index}/>)
+              { useJavaScript ? 
+                  componentList.map((component: any, index: number) => 
+                  <ExtremelyDangerousElement render={component.topic} key={index}/>)
+                  : componentList.map((component: any, index: number) => 
+                    <div key={index} dangerouslySetInnerHTML={{ __html: component.topic}}/>)
               }
           </div>
+          </>
       )
-    } else {
-      <div className = {`${columns} relative columns-4 h-[140vh] overflow-auto gap-10 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit`}>
-      <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-white">JavaScript enabled: {useJavaScript}</button>  
-      {componentList.map((component: any, index: number) => 
-        <div key={index} dangerouslySetInnerHTML={{ __html: component.topic}}/>)}
-        </div>
-    }
 }
