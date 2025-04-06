@@ -32,7 +32,7 @@ export default function Assets({slide}: {slide: number}){
         refreshInterval: 250
       }
     )
-    const [useJavaScript, setUseJavaScript] = useState(true)
+    const [useJavaScript, setUseJavaScript] = useState(false)
 
     let componentList = []
     if (data){

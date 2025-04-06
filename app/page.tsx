@@ -18,12 +18,10 @@ export default function Home() {
   async function getInitSlideAuthed(){
     const r = await fetch("/api/active").then(r => r.json())
     setCurrentSlide(r.id)
-    console.log("the active slide was", r, currentSlide)
   }
 
   useEffect(() => {
     if (session && session.status === "authenticated"){
-      console.log((session.data?.user as NewNextAuthUser).username)
       if ((session.data?.user as NewNextAuthUser).username === process.env.NEXT_PUBLIC_AUTHORISED_USER){
         getInitSlideAuthed()
       }

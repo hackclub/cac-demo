@@ -8,7 +8,6 @@ export default function Navigate({currentSlide, setCurrentSlide, className}: {cu
 
     async function handleClick(){
         const totalSlides = (await fetch("/api/slides").then(r => r.json()))["count"]
-        console.log(wrap(currentSlide, totalSlides), "from navigate")
         setCurrentSlide(wrap(currentSlide, totalSlides))
 
     }
