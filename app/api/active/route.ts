@@ -34,7 +34,6 @@ export async function POST(request: NextRequest){
             id: true
         }
         })
-    console.log(wrap(activeSlide!.id, totalSlides), "is wrapped slide")
     const deactivateSlide = await prisma.slide.update({
         where: {
             id: activeSlide!.id

@@ -1,21 +1,19 @@
 'use client'
 import Messages from "./components/Messages";
 import Assets from "@/app/components/Assets";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
 import { Slide } from "@prisma/client";
 import Navigate from "@/app/components/Navigate";
 import SignIn from "@/app/components/SignIn";
-import { useRouter } from "next/navigation";
 import { AuthStatus } from "@/app/components/AuthStatus";
 import ContentSlide from "@/app/components/ContentSlide";
 import { useSession } from "next-auth/react";
 import { NewNextAuthUser } from "@/utils/types";
 export default function Home() {
-  let [ currentSlide, setCurrentSlide ] = useState(0)
+  const [ currentSlide, setCurrentSlide ] = useState(0)
   const session = useSession();
-  const ref = useRef(null);
   
   async function getInitSlideAuthed(){
     const r = await fetch("/api/active").then(r => r.json())
@@ -25,21 +23,20 @@ export default function Home() {
 
   useEffect(() => {
     if (session && session.status === "authenticated"){
-      console.log((session.data?.user! as NewNextAuthUser).username)
-      if ((session.data?.user! as NewNextAuthUser).username === process.env.NEXT_PUBLIC_AUTHORISED_USER){
+      console.log((session.data?.user as NewNextAuthUser).username)
+      if ((session.data?.user as NewNextAuthUser).username === process.env.NEXT_PUBLIC_AUTHORISED_USER){
         getInitSlideAuthed()
       }
     } else {
       setCurrentSlide(1)
-  }}, [session.status])
+  }}, [session])
 
-  const router = useRouter();
 
-  const { data, error, isLoading, mutate } = useSWR(`/api/active?slide=${currentSlide}`, fetcher,
+  const { data } = useSWR(`/api/active?slide=${currentSlide}`, fetcher,
     {
       refreshInterval: 250,
       onSuccess: (data) => {
-        setCurrentSlide((data as any)["id"])
+        setCurrentSlide((data as {id: number})["id"])
       }
     }
   )

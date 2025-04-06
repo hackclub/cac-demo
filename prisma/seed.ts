@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 async function main(){
   const checkIfExists = await prisma.slide.findMany()
+  console.log(!checkIfExists.length)
   if (!checkIfExists.length){
     const createSlides = await prisma.slide.createMany({
       data: [
