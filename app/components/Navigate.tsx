@@ -1,12 +1,15 @@
 import { useSession } from "next-auth/react";
 import { NewNextAuthUser } from "@/utils/types";
-import useSWR from "swr";
+import { wrap } from "@/utils/sort";
 
 export default function Navigate({currentSlide, setCurrentSlide, className}: {currentSlide: number, setCurrentSlide: (value: any) => void, className: string}){
     const session = useSession();
 
+
     async function handleClick(){
-        setCurrentSlide(currentSlide+1)
+        const totalSlides = (await fetch("/api/slides").then(r => r.json()))["count"]
+        console.log(wrap(currentSlide, totalSlides), "from navigate")
+        setCurrentSlide(wrap(currentSlide, totalSlides))
 
     }
 

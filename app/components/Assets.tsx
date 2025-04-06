@@ -1,11 +1,10 @@
 import useSWR from "swr"
 import { multiFetcher } from "@/utils/fetcher"
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 
 function ExtremelyDangerousElement({render}: {render: string}){
   const elRef = useRef<HTMLDivElement>(null);
   const hasFiredRef = useRef<boolean>(false);
-
   useLayoutEffect(() => {
     if (!elRef.current) return;
 
@@ -33,18 +32,30 @@ export default function Assets({slide}: {slide: number}){
         refreshInterval: 250
       }
     )
+    const [useJavaScript, setUseJavaScript] = useState(true)
+    console.log(useJavaScript)
 
     let componentList = []
     if (data){
       componentList = data[0]
     }
     const columns = ("columns-" + Math.ceil(componentList.length/3))
-    console.log(columns)
-    return (
-        <div className = {`${columns} columns-4 h-[140vh] overflow-auto gap-10 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit`}>
-            { componentList.map((component: any, index: number) => 
-               <ExtremelyDangerousElement render={component.topic} key={index}/>
-            )}
+
+    if (useJavaScript){
+      return (
+          <div className = {`${columns} relative columns-4 h-[140vh] overflow-auto gap-10 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit`}>
+              <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-white">JavaScript enabled: {useJavaScript}</button>
+              { 
+                componentList.map((component: any, index: number) => 
+                <ExtremelyDangerousElement render={component.topic} key={index}/>)
+              }
+          </div>
+      )
+    } else {
+      <div className = {`${columns} relative columns-4 h-[140vh] overflow-auto gap-10 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit`}>
+      <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-white">JavaScript enabled: {useJavaScript}</button>  
+      {componentList.map((component: any, index: number) => 
+        <div key={index} dangerouslySetInnerHTML={{ __html: component.topic}}/>)}
         </div>
-    )
+    }
 }

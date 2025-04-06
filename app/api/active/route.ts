@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { wrap } from "@/utils/sort";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +24,8 @@ export async function GET(request: NextRequest){
 }
 
 export async function POST(request: NextRequest){
+    const totalSlides = (await prisma.slide.findMany()).length
+
     const activeSlide = await prisma.slide.findFirst({
         where: {
             current: true
@@ -31,7 +34,7 @@ export async function POST(request: NextRequest){
             id: true
         }
         })
-
+    console.log(wrap(activeSlide!.id, totalSlides), "is wrapped slide")
     const deactivateSlide = await prisma.slide.update({
         where: {
             id: activeSlide!.id
@@ -41,24 +44,24 @@ export async function POST(request: NextRequest){
         }
     })
 
-    try { 
+    //try { 
         const activateNext = await prisma.slide.update({
         where: {
-            id: (activeSlide!.id + 1)
+            id: wrap(activeSlide!.id, totalSlides)
         },
         data: {
             current: true
         }
         }) 
-    } catch { 
-        const activateFirst = await prisma.slide.update({
-            where: {
-                id: 1
-            },
-            data: { 
-                current: true
-            }
-        })
-    }
+    //} catch { 
+    //    const activateFirst = await prisma.slide.update({
+    //        where: {
+    //            id: 1
+    //        },
+    //        data: { 
+    //            current: true
+    //        }
+    //    })
+    //}
     return NextResponse.json(activeSlide)
 }

@@ -6,14 +6,14 @@ export function countTopics(list: TopicItem[]): WordData[] {
     const topic = item.topic;
     topicCount[topic] = (topicCount[topic] || 0) + 1;
   });
-
-  console.log(Object.keys(topicCount).map(topic => ({
-    text: topic,
-    value: topicCount[topic]})))
     
   return Object.keys(topicCount).map(topic => ({
     text: topic,
     value: topicCount[topic]
   }));
+}
+
+export function wrap(current: number, maximum: number){
+  return ((current % maximum) + 1)
 }
 

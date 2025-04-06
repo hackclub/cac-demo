@@ -17,7 +17,8 @@ model Slide {
   id         Int @id   @default(autoincrement())
   prompt     String
   directive  String
-  wordcloud  Boolean   @default(true)
+  type       String    @default("wordcloud") // options: wordcloud, ai, slide 
+  content    String?   // only for slides
   messages   Message[] 
   current    Boolean   @default(false)
 }
@@ -26,6 +27,7 @@ model Message {
   id       Int     @id @default(autoincrement())
   slideId  Int     
   slide    Slide   @relation(fields: [slideId], references: [id])
+  author   String  
   message  String
   topic    String  @default("")
 }
