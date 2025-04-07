@@ -19,7 +19,7 @@ async function main(){
         },
         {
           "prompt": "What do you want to see on this website?",
-          "directive": "Generate the prompt provided as a reusable HTML component that can be directly dropped into a <div>. DO NOT RENDER ANY ENCAPSULATING MARKDOWN TAGS OR EXPLANATIONS. If irrelevant or inappropriate, return ''. If body text required, use Lorem Ipsum.",
+          "directive": "Generate the prompt provided as a styled, visually interesting reusable HTML component that can be directly dropped into a <div>. DO NOT RENDER ANY ENCAPSULATING MARKDOWN TAGS OR EXPLANATIONS. If irrelevant or inappropriate, return ''.",
           "type": "ai"
         },
         {

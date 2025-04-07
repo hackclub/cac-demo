@@ -23,7 +23,7 @@ export default function ContentSlide({slide}: {slide: number}){
             
             <div className = "absolute bottom-3 w-full">
                 <Marquee className = "w-full">
-                        {emojiList.map((message: any, index: number) => <span className = "text-2xl mx-8" key = {index}>{message.author} says {message.topic}</span>)}
+                        {emojiList.map((message: any, index: number) => message.topic && <span className = "text-2xl mx-8" key = {index}>{message.author} says {message.topic}</span>)}
                 </Marquee>
             </div>
         </div>
