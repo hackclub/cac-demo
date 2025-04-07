@@ -7,6 +7,18 @@ async function main(){
     const createSlides = await prisma.slide.createMany({
       data: [
         {
+          "prompt": "this is an interactive presentation !!",
+          "directive": "Interpret the text received as a series of emojis, with a maximum of five emojis used, and return the emojis. If inappropriate, return ''. Do not render any encapsulating markdown tags or any explanations.",
+          "content": `
+              <h1 class = 'text-5xl'>did this get your attention?</h1>
+              <ul class = "list-disc list-inside">
+                <li>text the number on the screen to get the ai to turn your message into emoji</li>
+                <li>by the way don't send anything inappropriate, we will have your phone numbers...</li>
+              </ul>
+              `,
+          "type": "slide"
+        },
+        {
           "prompt": "How would you improve your school?",
           "directive": "You are moderating a civics workshop for teenagers. Summarise the text submitted into generic statements of three or less words, without quotation marks. For instance, if the prompt provided is similar to 'I would like school to start later', abbreviate it to 'Later school start'. If irrelevant or inappropriate, return ''. DO NOT USE MORE THAN THREE WORDS",
           "current": true,
