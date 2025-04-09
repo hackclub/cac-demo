@@ -12,7 +12,7 @@ async function main(){
           "content": `
               <div class = 'content'>
                 <ul>
-                  <li>text a sentence to the number on the screen to see something cool happen</li>
+                  <li>text in something to the number on the screen to see something cool happen</li>
                   <li>don't send anything inappropriate 🙏 we will have your phone number...</li>
                 </ul>
               </div>
@@ -21,7 +21,7 @@ async function main(){
           "current": true
         },
         {
-          "prompt": "nice!",
+          "prompt": "nice! now what",
           "directive": "Interpret the text received as a series of emojis, with a maximum of five emojis used, and return the emojis. If inappropriate, return ''. Do not render any encapsulating markdown tags or any explanations.",
           "content": `
               <div class = 'content'>
@@ -37,6 +37,14 @@ async function main(){
           "prompt": "How would you improve your school?",
           "directive": "You are moderating a civics workshop for teenagers. Summarise the text submitted into generic statements of three or less words, without quotation marks. For instance, if the prompt provided is similar to 'I would like school to start later', abbreviate it to 'Later school start'. If irrelevant or inappropriate, return ''. DO NOT USE MORE THAN THREE WORDS",
           "type": "wordcloud"
+        },
+        {
+          "prompt": "so how does this work",
+          "directive": "Interpret the text received as a series of emojis, with a maximum of five emojis used, and return the emojis. If inappropriate, return ''. Do not render any encapsulating markdown tags or any explanations.",
+          "content": `
+                <img class = 'bg-cover mx-auto' style = 'width: 50%' src = 'https://hc-cdn.hel1.your-objectstorage.com/s/v3/6a0a9f02d935d707fe42553a245187f8b04631b0_image.png'/>
+          `,
+          "type": "slide"
         },
         {
           "prompt": "What are the biggest tech challenges young people will face in the next 10 years?",
