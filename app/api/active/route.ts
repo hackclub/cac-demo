@@ -26,7 +26,6 @@ export async function GET(request: NextRequest){
 export async function POST(request: NextRequest){
    
     const back = request.nextUrl.searchParams.get("back")
-    console.log(back)
     const totalSlides = (await prisma.slide.findMany()).length
     let activeSlide = await prisma.slide.findFirst({
             where: {
@@ -36,13 +35,13 @@ export async function POST(request: NextRequest){
                 id: true
             }
     })
-        if (!activeSlide){
+    if (!activeSlide){
             activeSlide = { id: 1 }
         }
-        if (back){
+    if (back){
             console.log('back true', activeSlide, activeSlide.id-1)
             if (activeSlide!.id === 1){
-                return 
+                return NextResponse.json(activeSlide)
             } else {
                 const activatePrev = await prisma.slide.update({
                     where: {
@@ -52,6 +51,7 @@ export async function POST(request: NextRequest){
                         current: true
                     }
                     }) 
+                return NextResponse.json(activeSlide)
             }
         } else {
             const activateNext = await prisma.slide.update({
