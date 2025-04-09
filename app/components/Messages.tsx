@@ -10,7 +10,7 @@ import {ExampleProps, WordData } from "@/utils/types";
 import { countTopics } from "@/utils/sort";
 
 
-const colors = ["#005db1", "#002343", " #85B4D6", "#0c4a6e"];
+const colors = ["#0084d1", "#0092b8", "#00bba7", "#00bc7d"];
 
 
 const fixedValueGenerator = () => 0.5;
