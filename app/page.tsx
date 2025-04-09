@@ -50,8 +50,8 @@ export default function Home() {
           <img className = "fixed z-30 top-0 left-2 w-[8vw]" alt="Hack Club" src = "https://assets.hackclub.com/flag-orpheus-top.svg"/>
           <div className = "relative border bg-white px-8 border-black rounded-md col-span-full row-span-2 gap-2 justify-evenly overflow-auto">
             <AuthStatus className = "fixed top-0 left-1/2 -translate-x-1/2 "/>
-            <div className = "md:border-t md:border-l border-l max-md:border-b border-black p-1 max-md:rounded-bl-2xl md:rounded-tl-2xl h-max absolute right-0 max-md:top-0 md:bottom-0">
-              <Navigate className = "bg-white text-sm flex flex-row gap-2 align-middle items-center" currentSlide = {currentSlide} setCurrentSlide={setCurrentSlide}/>
+            <div className = "md:border-t md:border-l border-l max-md:border-b bg-white border-black p-1 max-md:rounded-bl-2xl md:rounded-tl-2xl h-max absolute right-0 max-md:top-0 md:bottom-0">
+              <Navigate className = "text-sm flex flex-row gap-2 align-middle items-center" currentSlide = {currentSlide} setCurrentSlide={setCurrentSlide}/>
             </div>
             <div className = "flex flex-col justify-around md:h-full max-md:text-center md:float-center my-auto md:float-left w-full md:w-1/2 lg:w-4/7">
               <h2 className = "text-3xl md:text-4xl lg:text-5xl">{slide ? slide.prompt : "Loading..."}</h2>
