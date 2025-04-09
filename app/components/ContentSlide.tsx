@@ -28,7 +28,7 @@ export default function ContentSlide({slide}: {slide: number}){
 
     useEffect(() => {
         // Initialize from localStorage on first load
-        const storedId = localStorage.getItem(`slide-${emojiList[0]?.id}-last-id`)
+        const storedId = localStorage.getItem('last-message-id')
         if (storedId) {
             prevMessageId.current = storedId
         }
@@ -41,19 +41,17 @@ export default function ContentSlide({slide}: {slide: number}){
         if (currentId && prevMessageId.current && currentId !== prevMessageId.current) {
             console.log(`New message detected! Previous ID: ${prevMessageId.current}, Current ID: ${currentId}`)
             prevMessageId.current = currentId
-            localStorage.setItem(`slide-${emojiList[0]?.id}-last-id`, currentId)
+            localStorage.setItem('last-message-id', currentId)
         } else if (currentId && !prevMessageId.current) {
             // Just store the ID without alerting on first load
             prevMessageId.current = currentId
-            localStorage.setItem(`slide-${emojiList[0]?.id}-last-id`, currentId)
+            localStorage.setItem('last-message-id', currentId)
         }
     }, [emojiList])
   
-    const latestEmoji = emojiList[0]?.topic?.match(/[\p{Emoji}\u{1F3FB}-\u{1F3FF}\u{1F9B0}-\u{1F9B3}]/gu)?.[0]
     const shouldShowConfetti = emojiList.length > 0 && 
                               prevMessageId.current && 
-                              emojiList[0]?.id.toString() !== prevMessageId.current &&
-                              latestEmoji !== undefined
+                              emojiList[0]?.id.toString() !== prevMessageId.current
   
     return (
         <>
@@ -67,7 +65,7 @@ export default function ContentSlide({slide}: {slide: number}){
                         }
                 </Marquee>
             </div>
-            {shouldShowConfetti && latestEmoji && <Confetti emoji={latestEmoji} />}
+            {shouldShowConfetti && emojiList[0]?.topic && <Confetti emoji={emojiList[0].topic} />}
         </div>
         </>
     )
