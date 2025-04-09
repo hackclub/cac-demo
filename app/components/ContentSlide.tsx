@@ -19,12 +19,14 @@ export default function ContentSlide({slide}: {slide: number}){
     return (
         <>
         <div className = "flex flex-col relative h-full">
-            <div className = "p-8 grow h-full" dangerouslySetInnerHTML={{ __html: slideContent}}/>            
-            
-            <div className = "absolute bottom-3 w-full">
-                <Marquee className = "w-full">
-                        {emojiList.map((message: any, index: number) => message.topic && <span className = "text-2xl mx-8" key = {index}>{message.author} says {message.topic}</span>)}
-                </Marquee>
+            <div className = "p-8" dangerouslySetInnerHTML={{ __html: slideContent}}/>            
+            <div className = "absolute bg-white bottom-3 w-full">
+                <Marquee className = "w-full border-t-2 pt-2">
+                        {emojiList.length ? 
+                            emojiList.map((message: any, index: number) => message.topic && <span className = "text-2xl mx-8" key = {index}>{message.author} says {message.topic}</span>)
+                            : <span className = "text-2xl mx-8">text the number on the screen something</span>
+                        }
+                            </Marquee>
             </div>
         </div>
             </>

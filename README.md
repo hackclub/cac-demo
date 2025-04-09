@@ -6,6 +6,8 @@ These slides are accessible and previewable by anyone, but controllable by one p
 
 The slide that the authorised user/'admin' is on dictates how the sent-in text messages are processed. Unauthorised users can still navigate between each slide. 
 
+Between sessions, switch out the database URL then re-seed it using `bun prisma db seed`.
+
 ## Development
 ### Twilio
 1. Create a Twilio account and obtain a phone number for use. Set the `NEXT_PUBLIC_PHONE_NUMBER` variable to this phone number.
@@ -19,7 +21,7 @@ The slide that the authorised user/'admin' is on dictates how the sent-in text m
 ### General
 1. Clone the repository.
     ```
-    git clone https://github.com/phthallo/rpg && cd rpg
+    git clone https://github.com/hackclub/cac-demo && cd cac-demo
     ```
 
 2. Install dependencies. ([install bun](https://bun.sh/docs/installation))

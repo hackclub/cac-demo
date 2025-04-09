@@ -72,7 +72,7 @@ export default function Messages({slide}: {slide: number}){
     return (
         <div className = "w-full h-full overflow-auto">
           <ParentSize>{({ width, height }) => 
-            <Example width={width} height={height} wordList = {wordsList}/>
+            wordsList.length ? <Example width={width} height={height} wordList = {wordsList}/> : <div className = "text-4xl h-full flex items-center justify-center text-center">Text in something to see something 👀</div>
           }</ParentSize>
         </div>
     )

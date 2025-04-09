@@ -26,6 +26,15 @@ h1, h2, h3, p, body, div {
 }
 
 
+ul {
+	@apply list-disc list-inside text-4xl my-8
+}
+
+li {
+	@apply my-6
+}
+
+
 .wordcloud {
 	@apply flex flex-col select-none
   }

@@ -7,21 +7,35 @@ async function main(){
     const createSlides = await prisma.slide.createMany({
       data: [
         {
-          "prompt": "this is an interactive presentation !!",
+          "prompt": "this is an interactive presentation",
           "directive": "Interpret the text received as a series of emojis, with a maximum of five emojis used, and return the emojis. If inappropriate, return ''. Do not render any encapsulating markdown tags or any explanations.",
           "content": `
-              <h1 class = 'text-5xl'>did this get your attention?</h1>
-              <ul class = "list-disc list-inside">
-                <li>text the number on the screen to get the ai to turn your message into emoji</li>
-                <li>by the way don't send anything inappropriate, we will have your phone numbers...</li>
-              </ul>
+              <div class = 'content'>
+                <ul>
+                  <li>text a sentence to the number on the screen to see something cool happen</li>
+                  <li>don't send anything inappropriate 🙏 we will have your phone number...</li>
+                </ul>
+              </div>
               `,
-          "type": "slide"
+          "type": "slide",
+          "current": true
+        },
+        {
+          "prompt": "nice!",
+          "directive": "Interpret the text received as a series of emojis, with a maximum of five emojis used, and return the emojis. If inappropriate, return ''. Do not render any encapsulating markdown tags or any explanations.",
+          "content": `
+              <div class = 'content'>
+                <ul>
+                  <li>17 year old from australia (🇦🇺🦘) and an engineer at hack club</li>
+                  <li>i have thoughts™ about ai</li>
+                </ul>
+              </div>
+              `,
+          "type": "slide",
         },
         {
           "prompt": "How would you improve your school?",
           "directive": "You are moderating a civics workshop for teenagers. Summarise the text submitted into generic statements of three or less words, without quotation marks. For instance, if the prompt provided is similar to 'I would like school to start later', abbreviate it to 'Later school start'. If irrelevant or inappropriate, return ''. DO NOT USE MORE THAN THREE WORDS",
-          "current": true,
           "type": "wordcloud"
         },
         {
@@ -35,14 +49,20 @@ async function main(){
           "type": "ai"
         },
         {
-          "prompt": "Generic Presentation Title",
+          "prompt": "tech",
           "directive": "Interpret the text received as a series of emojis, with a maximum of five emojis used, and return the emojis. If inappropriate, return ''. Do not render any encapsulating markdown tags or any explanations.",
           "content": `
-              <h1 class = 'text-5xl'>what's up</h1>
-              <ul class = "list-disc list-inside">
-                <li>Something something</li>
-                <li>Something something</li>
-              </ul>
+              <div class = 'text-3xl my-8 grid grid-cols-2'>
+                <ul class = 'list-disc list-inside col-span-1'>
+                  <li>next.js, react, tailwindcss, prisma</li>
+                  <li>ai model: <code>meta-llama/llama-4-scout-17b-16e-instruct</code></li>
+                  <li>curious? hacky? 👀 check out what's happening behind the scenes at:</li>
+                   https://github.com/hackclub/cac-demo
+                </ul>
+                <div class = 'col-span-1 flex flex-row gap-2 *:basis-1/2 *:mx-auto'>
+                  <img src = 'https://hc-cdn.hel1.your-objectstorage.com/s/v3/a5bb220e16819271929f8d45c96c2b21dba0ce17_image.png'/>
+                  </div>
+              </div>
               `,
           "type": "slide"
         },
