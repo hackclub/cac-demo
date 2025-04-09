@@ -46,11 +46,11 @@ export default function Home() {
   }
 
   return (
-        <div className = "h-[100vh] w-[100vw] bg-primary grid grid-rows-7 grid-cols-6 p-6 gap-6">
+        <div className = "h-[100vh] w-[100vw] bg-stone-700 grid grid-rows-7 grid-cols-6 p-6 gap-6">
           <img className = "fixed z-30 top-0 left-2 w-[8vw]" alt="Hack Club" src = "https://assets.hackclub.com/flag-orpheus-top.svg"/>
-          <div className = "relative border bg-white px-8 border-black rounded-md col-span-full row-span-2 gap-2 justify-evenly overflow-auto">
-            <AuthStatus className = "fixed top-0 left-1/2 -translate-x-1/2 "/>
-            <div className = "md:border-t md:border-l border-l max-md:border-b bg-white border-black p-1 max-md:rounded-bl-2xl md:rounded-tl-2xl h-max absolute right-0 max-md:top-0 md:bottom-0">
+          <div className = "relative border text-white bg-stone-800 px-8 border-white rounded-md col-span-full row-span-2 gap-2 justify-evenly overflow-auto">
+            <AuthStatus className = "text-white fixed top-0 left-1/2 -translate-x-1/2 "/>
+            <div className = "md:border-t md:border-l border-l max-md:border-b bg-stone-800 border-white p-1 max-md:rounded-bl-2xl md:rounded-tl-2xl h-max absolute right-0 max-md:top-0 md:bottom-0">
               <Navigate className = "text-sm flex flex-row gap-2 align-middle items-center" currentSlide = {currentSlide} setCurrentSlide={setCurrentSlide}/>
             </div>
             <div className = "flex flex-col justify-around md:h-full max-md:text-center md:float-center my-auto md:float-left w-full md:w-1/2 lg:w-4/7">
@@ -62,7 +62,7 @@ export default function Home() {
               <h2 className = "text-xl md:text-2xl">Text your answer!</h2>
             </div>
           </div>
-          <div className = "col-span-full bg-white row-span-5 border border-black rounded-md overflow-auto">
+          <div className = "col-span-full bg-stone-800 row-span-5 border border-white rounded-md overflow-auto">
           { slide && slide.type === "wordcloud" ? 
             <>
             <Messages slide = {currentSlide} /> 

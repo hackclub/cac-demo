@@ -5,8 +5,6 @@ import { wrap } from "@/utils/sort";
 export default function Navigate({currentSlide, setCurrentSlide, className}: {currentSlide: number, setCurrentSlide: (value: any) => void, className: string}){
     const session = useSession();
 
-
-
     async function handleForward(){
         const totalSlides = (await fetch("/api/slides").then(r => r.json()))["count"]
         setCurrentSlide(wrap(currentSlide, totalSlides))

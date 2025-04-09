@@ -42,7 +42,7 @@ export default function Assets({slide}: {slide: number}){
 
       return (
         <>
-        <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-white">JavaScript enabled: {useJavaScript.toString()}</button>
+        <button onClick={() => setUseJavaScript(!useJavaScript)} className = "z-30 absolute right-0 top-0 border-1 p-2 rounded-sm bg-stone-800">JavaScript enabled: {useJavaScript.toString()}</button>
           <div className = {`${columns} relative columns-4 h-[140vh] overflow-auto gap-10 [column-fill:_balance] box-border mx-auto before:box-inherit after:box-inherit`}>
               { useJavaScript ? 
                   componentList.map((component: any, index: number) => 

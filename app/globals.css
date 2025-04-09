@@ -22,7 +22,7 @@
 
 
 h1, h2, h3, p, body, div {
-	@apply text-black font-title
+	@apply text-white font-title
 }
 
 
