@@ -38,6 +38,14 @@ export async function POST(request: NextRequest){
     if (!activeSlide){
             activeSlide = { id: 1 }
         }
+    const deactivateSlide = await prisma.slide.update({
+        where: {
+            id: activeSlide!.id
+        },
+        data: {
+            current: false
+        }
+    })
     if (back){
             console.log('back true', activeSlide, activeSlide.id-1)
             if (activeSlide!.id === 1){
@@ -63,13 +71,5 @@ export async function POST(request: NextRequest){
                 }
                 }) 
         }
-        const deactivateSlide = await prisma.slide.update({
-            where: {
-                id: activeSlide!.id
-            },
-            data: {
-                current: false
-            }
-        })
         return NextResponse.json(activeSlide)
 }
